@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import logo from "../assets/react.svg";
 import "./navbar.css";
+import { branding } from "../config/branding";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,33 +10,8 @@ const NavBar = () => {
   const handleLogout = () => {
     localStorage.removeItem("authenticated_user");
     localStorage.removeItem("auth_timestamp");
-
-    const OfficeAny = (window as any).Office;
-
-    if (OfficeAny?.context?.ui?.displayDialogAsync) {
-      OfficeAny.context.ui.displayDialogAsync(
-        `${window.location.origin}/.auth/logout?post_logout_redirect_uri=${encodeURIComponent(
-          window.location.origin,
-        )}`,
-        { height: 60, width: 40, displayInIframe: false },
-        (result: any) => {
-          if (result.status === OfficeAny.AsyncResultStatus.Succeeded) {
-            const dialog = result.value;
-            setTimeout(() => {
-              dialog.close();
-              window.location.reload();
-            }, 1200);
-          } else {
-            window.location.href = "/.auth/logout";
-          }
-        },
-      );
-    } else {
-      window.location.href = "/.auth/logout";
-    }
   };
 
-  // Close profile dropdown on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (
@@ -54,22 +29,18 @@ const NavBar = () => {
     <header className="navbar">
       {/* LEFT */}
       <div className="navbar-left">
-        <img src={logo} alt="Logo" className="navbar-logo" />
+        <img src={branding.logo.light} alt="logo" className="navbar-logo" />
         <span className="navbar-title">Client Onboarding App</span>
       </div>
 
       {/* RIGHT */}
-      <div className="navbar-right">
-        {/* Search */}
+      <div className={`navbar-right ${menuOpen ? "open" : ""}`}>
         <input type="search" placeholder="Search…" className="navbar-search" />
 
-        {/* Notifications */}
         <button className="icon-button" aria-label="Notifications">
           🔔
-          <span className="notification-dot" />
         </button>
 
-        {/* Profile */}
         <div className="profile" ref={profileRef}>
           <button
             className="profile-button"
@@ -90,13 +61,15 @@ const NavBar = () => {
         </div>
       </div>
 
-      {/* Mobile toggle */}
+      {/* Hamburger Toggle */}
       <button
-        className="navbar-toggle"
+        className={`navbar-toggle ${menuOpen ? "open" : ""}`}
         onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Toggle navigation"
+        aria-label={menuOpen ? "Close menu" : "Open menu"}
       >
-        ☰
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
       </button>
     </header>
   );
