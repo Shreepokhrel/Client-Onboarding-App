@@ -8,4 +8,5 @@ export function applyTheme() {
   root.style.setProperty("--color-accent", branding.colors.accent);
   root.style.setProperty("--color-background", branding.colors.background);
   root.style.setProperty("--color-text", "#ffffff");
+  root.style.setProperty("--color-side", branding.colors.side_icon);
 }

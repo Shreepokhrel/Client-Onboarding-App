@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import "./navbar.css";
 import { branding } from "../config/branding";
+import { User, Bell } from "lucide-react";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -38,7 +39,7 @@ const NavBar = () => {
         <input type="search" placeholder="Search…" className="navbar-search" />
 
         <button className="icon-button" aria-label="Notifications">
-          🔔
+          <Bell size={18} />
         </button>
 
         <div className="profile" ref={profileRef}>
@@ -46,7 +47,7 @@ const NavBar = () => {
             className="profile-button"
             onClick={() => setProfileOpen(!profileOpen)}
           >
-            👤
+            <User size={18} />
           </button>
 
           {profileOpen && (

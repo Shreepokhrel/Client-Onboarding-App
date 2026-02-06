@@ -12,12 +12,13 @@ import Security from "./pages/Security";
 import Settings from "./pages/Settings";
 import Updates from "./pages/Updates";
 import Users from "./pages/Users";
+import LogOut from "./pages/LogOut";
 
 export default function App() {
   return (
     <ThemeProvider>
       <Router>
-        <NavBar />
+        {/* <NavBar /> */}
         <div className="main">
           <Sidebar />
 
@@ -25,7 +26,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/knowledgebase" element={<KnowledgeBase />} />
+              <Route path="/knowledge-base" element={<KnowledgeBase />} />
               <Route path="/modules" element={<Modules />} />
               <Route path="/overview" element={<Overview />} />
               <Route path="/roadmap" element={<Roadmap />} />
@@ -33,6 +34,7 @@ export default function App() {
               <Route path="/settings" element={<Settings />} />
               <Route path="/updates" element={<Updates />} />
               <Route path="/users" element={<Users />} />
+              <Route path="/logout" element={<LogOut />} />
             </Routes>
           </div>
         </div>
